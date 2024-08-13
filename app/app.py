@@ -1,7 +1,12 @@
-from flask import Flask
+from fastapi import FastAPI
+import uvicorn
+import time
 
-app = Flask(__name__)
+app = FastAPI()
 
-@app.route('/')
-def index():
-    return 'hi'
+@app.get('/api/message')
+def route(message: str = "Hello!"):
+    return {'message': message}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="localhost", port=8000)
